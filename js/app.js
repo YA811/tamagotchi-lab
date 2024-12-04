@@ -33,33 +33,28 @@ let timer;
 let gameOver;
 
 /*------------------------ Cached Element References ------------------------*/
-const boredomStatEl= document.querySelector('.boredom-stat');
-const hungerStatEl= document.querySelector('.hunger-stat');
-const sleepinessStatEl= document.querySelector('.sleepiness-stat');
+const boredomStatEl= document.querySelector('#boredom-stat');
+const hungerStatEl= document.querySelector('#hunger-stat');
+const sleepinessStatEl= document.querySelector('#sleepiness-stat');
 
-const playBtnEl= document.querySelector('.play');
-const feedBtnEl= document.querySelector('.feed');
-const sleepBtnEl= document.querySelector('.sleep');
+const playBtnEl= document.querySelector('#play');
+const feedBtnEl= document.querySelector('#feed');
+const sleepBtnEl= document.querySelector('#sleep');
 
-const gameMessageEl= document.querySelector('.message');
-const resetBtnEl= document.querySelector('.restart');
+const gameMessageEl= document.querySelector('#message');
+const resetBtnEl= document.querySelector('#restart');
 
 /*-------------------------------- Functions --------------------------------*/
-timer(() => {
-  }, 2000);
+
 
 function init(){
 resetBtnEl.classList.add('hidden');
 gameMessageEl.classList.add('hidden');
 gameOver= false;
-function setInterval(runGame,timer){
-
-}
+const timer = setInterval(runGame, 2000);
 }
 
 
-
-  
 function runGame(){
     updateStates();
     checkGameOver();
@@ -67,9 +62,9 @@ function runGame(){
 }
 
 function render(){
-boredomStatEl= state.boredom;
-hungerStatEl= state.hunger;
-sleepinessStatEl= state.sleepiness;
+boredomStatEl.innerHTML= state.boredom;
+hungerStatEl.innerHTML= state.hunger;
+sleepinessStatEl.innerHTML= state.sleepiness;
 
 if(gameOver===true){
     timer.clearInterval();
@@ -79,9 +74,9 @@ if(gameOver===true){
 }
 
 function updateStates(){
-   boredom+ Math.floor(Math.random(0,1,2,3));
-   hunger+= Math.floor(Math.random(0,1,2,3));
-   sleepiness+= Math.floor(Math.random(0,1,2,3));
+   boredom+= Math.floor(Math.random()*3);
+   hunger+= Math.floor(Math.random()*3);
+   sleepiness+= Math.floor(Math.random()*3);
     
 }
 
@@ -93,7 +88,6 @@ function checkGameOver(){
 function playBtnClick(){
     state.boredom= 0;
     render();
-
 }
 
 function feedBtnClick(){
@@ -113,3 +107,4 @@ feedBtnEl.addEventListener('click', feedBtnClick());
 sleepBtnEl.addEventListener('click', sleepBtnClick());
 resetBtnEl.addEventListener('click',init());
 
+init()
